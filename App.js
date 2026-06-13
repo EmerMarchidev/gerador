@@ -54,7 +54,6 @@ export default function App() {
           {passwordValue}
         </Text>
       </View>
-
   );
 }
 
