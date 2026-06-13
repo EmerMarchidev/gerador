@@ -1,12 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Image } from 'react-native-web';
-import Slider from '@react-native-community/slider'
 import { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
+import { Image } from 'react-native';
+import Slider from '@react-native-community/slider';
+
+let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 export default function App() {
 
   const [size,setSize] = useState(10)
+  const [passwordValue, setPasswordValue] = useState("")
+
+  function generatePassword(){
+
+    let password = "";
+
+    for(let i = 0, n = charset.length; i < size; i++){
+      password += charset.charAt(Math.floor(Math.random() * n))
+    }
+
+    setPasswordValue(password)
+  }
 
   return (
     <View style={styles.container}>
@@ -18,23 +32,29 @@ export default function App() {
       <Text style={styles.title}>{size} caracteres</Text>
 
       <View style={styles.area}>
+
         <Slider
-          style={{ height: 50}}
-          minumumValue={6}
-          maximumValeu={20}
+          style={{ height: 50 }}
+          minimumValue={6}
+          maximumValue={20}
           maximumTrackTintColor='#ff0000'
-          minimumTrackTintColor='#392de9'
+          minimumTrackTintColor='#000'
           thumbTintColor='#392de9'
           value={size}
-          onValueChange={ (value) => setSize(value) }
+          onValueChange={(value) => setSize(Math.floor(value))}
         />
-      </View>
-        <TouchableOpacity style={styles.button}>
+
+        </View>
+
+        <TouchableOpacity style={styles.button} onPress={generatePassword}>
           <Text style={styles.buttonText}>Gerar Senha</Text>
         </TouchableOpacity>
-      
-  
+
+        <Text style={styles.password}>
+          {passwordValue}
+        </Text>
       </View>
+
   );
 }
 
@@ -72,5 +92,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold"
-  }
+  },
+  password: {
+  marginTop: 20,
+  fontSize: 22,
+  fontWeight: 'bold',
+  color: '#392de9'
+}
 });
