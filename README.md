@@ -4,7 +4,7 @@ Gerador de Senhas:
 
 -As principais funcionalidades são, geração automática de senhas seguras, escolha da quantidade de caracteres através de um Slider, senhas com letras maiúsculas, letras minúsculas e números e mostra a senha gerada na tela
 
-- 1. Instalar o Node.js
+1. Instalar o Node.js
 Baixe e instale o Node.js:
 2. Instalar o Expo CLI
 Abra o terminal e execute:
